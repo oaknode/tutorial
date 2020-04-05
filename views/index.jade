@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  p This is a simple "guestbook" example.
+  form 
+    input(type="text", name="entry")
+    input(type="submit", value="post")
+  h2 Entries:
+  each val in entries
+    p= val

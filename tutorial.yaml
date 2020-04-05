@@ -1,0 +1,25 @@
+namespace: moncc-tutorial
+
+app:
+  defines: runnable
+  version: 0.0.1
+  containers:
+    defines: containers
+    app:
+      image: moncc-tutorial/tutorial
+      image-tag: latest
+      environment:
+        - <- `PORT=${port}`
+        - <- `DB_HOST=${db-host}`
+        - <- `DB_PORT=${db-port}`
+  variables:
+    defines: variables
+    port:
+      type: int
+      value: 8080
+    db-host:
+      type: string
+      value: localhost
+    db-port:
+      type: int
+      value: 27017
