@@ -1,0 +1,25 @@
+namespace: /moncc-tutorial
+
+tutorial-mongo:
+  inherits: mongodb/latest
+
+tutorial-app:
+  inherits: moncc-tutorial/app
+  variables:
+    port: 9090
+    db-host: <- search-container("moncc-tutorial/tutorial-mongo", "database")
+
+tutorial-nginx:
+  inherits: nginx/reverse-proxy
+  variables:
+    server-name: tutorial-app.moncc.io
+    listen-port: 8080
+    proxy-target-host: <- search-container("moncc-tutorial/tutorial-app", "app")
+    proxy-target-port: 9090
+
+system:
+  defines: process-group
+  runnable-list:
+    - /moncc-tutorial/tutorial-mongo
+    - /moncc-tutorial/tutorial-app
+    - /moncc-tutorial/tutorial-nginx

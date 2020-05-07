@@ -1,4 +1,4 @@
-namespace: moncc-tutorial
+namespace: /moncc-tutorial
 
 app:
   defines: runnable
@@ -6,8 +6,9 @@ app:
   containers:
     defines: containers
     app:
-      image: moncc-tutorial/tutorial
-      image-tag: latest
+      image: moncc-tutorial/tutorial:latest
+      ports:
+        - <- `${port}:${port}`
       environment:
         - <- `PORT=${port}`
         - <- `DB_HOST=${db-host}`
