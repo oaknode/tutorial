@@ -9,7 +9,7 @@ tutorial-app:
     inherits: moncc-tutorial/app
     variables:
         port: 9090
-        db-host: <- get-container-ip("moncc-tutorial/tutorial-mongo", "database")
+        db-host: <- get-hostname("moncc-tutorial/tutorial-mongo", "database")
 
 tutorial-nginx:
     defines: runnable
@@ -17,7 +17,7 @@ tutorial-nginx:
     variables:
         server-name: tutorial-app.moncc.io
         listen-port: 8080
-        proxy-target-host: <- get-container-ip("moncc-tutorial/tutorial-app", "app")
+        proxy-target-host: <- get-hostname("moncc-tutorial/tutorial-app", "app")
         proxy-target-port: 9090
 
 system:
